@@ -1,0 +1,29 @@
+En düşük  getiriye sahip   hisseler
+
+1- PFE: -34.22330097087378
+2- NKE: -34.08023483365949
+3-SBUX: -4.465584778959144
+
+En yüksek getiriye sahip  5 hisse
+
+NVDA: 2897.17
+AVGO: 989.73
+TSLA: 1431.76
+TSM: 407.51
+AMD: 374.70
+
+
+NVDA - Volume Max değeri= 128226755
+ASML - Volume Min değeri=  1270975
+NVDA - Marketcap Max değeri= 4438151985168
+SBUX - Marketcap Min değeri  96085165082
+TSLA - Pe Max değeri = 259.33
+PFE - Pe Min değeri  =13.1
+GS - Eps Max değeri =49.23
+TSLA - Eps Min değeri  =1.73
+AAPL - Changepct Max değeri =3.94
+SBUX - Changepct Min değeri  -0.97
+TSM - Shares Max değeri =25932620000
+LMT - Shares Min değeri  =233465000
+NVDA - Beta Max değeri =2.13
+LMT - Beta Min değeri  =0.28
