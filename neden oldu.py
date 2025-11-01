@@ -22,7 +22,7 @@ url['Date']=pd.DataFrame(url['Date'])
 hkodu=['Close', 'MSFT', 'AMZN', 'NVDA', 'META', 'GOOG', 'TSLA'] 
 for hk in hkodu:
    """ 5 yıllık """
-   fi_5 = url[(url['Date'] >= '2020-01-03') & (url['Date'] <= '2025-10-24')]
+   fi_5 = url[(url['Date'] >= '2020-01-03') & (url['Date'] <= '2025-10-28')]
    ilk=fi_5[hk].iloc[0]
    son=fi_5[hk].iloc[-1]
    
@@ -33,7 +33,7 @@ for hk in hkodu:
 
    
    """ 1 yıllık """
-   fi_1=url[(url['Date'] >='2024-10-24') &(url['Date'] <='2025-10-23')]
+   fi_1=url[(url['Date'] >='2024-10-28') &(url['Date'] <='2025-10-28')]
    ilkk=fi_1[hk].iloc[0]
    sonn=fi_1[hk].iloc[-1]
 
@@ -42,42 +42,54 @@ for hk in hkodu:
    print(f"1 yıllık {hk} değişim : {fi_1_yüz:.2f}%")
 
    """ 2 yıllık  """
-   fi_2=url[(url['Date'] >="2023-10-24") & (url['Date'] <="2025-10-23")]
+   fi_2=url[(url['Date'] >="2023-10-28") & (url['Date'] <="2025-10-28")]
 
    ilk_2=fi_2[hk].iloc[0]
    son_2=fi_2[hk].iloc[-1]
 
-   yüzde_2=((son_2 - ilk_2)/ilk_2)*100
+   fi_2_yüz=((son_2 - ilk_2)/ilk_2)*100
 
-   print(f"2 yıllık : {yüzde_2:.2f}%")
+   print(f"2 yıllık : {fi_2_yüz:.2f}%")
 
    "3 yıllık"
 
-   fi_3=url[(url['Date'] >="2022-10-24") & (url['Date'] <="2025-10-23")]
+   fi_3=url[(url['Date'] >="2022-10-28") & (url['Date'] <="2025-10-28")]
 
    ilk_3=fi_3[hk].iloc[0]
    son_3=fi_3[hk].iloc[-1]
 
-   yüz_3=((son_3 - ilk_3)/ilk_3)*100
+   fi_3_yüz=((son_3 - ilk_3)/ilk_3)*100
 
-   print(f"3 yıl : {yüz_3:.2f}%")
+   print(f"3 yıl : {fi_3_yüz:.2f}%")
 
    "4 yıllık"
-   fi_4=url[(url["Date"] >="2021-10-23") & (url['Date']  <="2025-10-23")]
+   fi_4=url[(url["Date"] >="2021-10-28") & (url['Date']  <="2025-10-28")]
 
    ilk_4=fi_4[hk].iloc[0]
    son_4=fi_4[hk].iloc[-1]
 
-   yüz_4=((son_4 - ilk_4)/ ilk_4)*100
-   tpu=yüz_4 * 1000
-   print(tpu)
-
-   print(f"4 yıllık : {yüz_4:.2f}%")
+   fi_4_yüz=((son_4 - ilk_4)/ ilk_4)*100
 
 
+
+   print(f"4 yıllık : {fi_4_yüz:.2f}%")
+
+   """ 
    sns.lineplot(x='Date' ,y=hk , data=url)
    plt.title(f"{hk} hisse senedi 2020-2025")
    plt.show()
+    """
+   """ paraya ne olur   1000$"""
+
+   money=1000
+   """ yg:yıllık getiri """
+   yg=[fi_1_yüz ,fi_2_yüz,  fi_3_yüz, fi_4_yüz,  fi_5_yüz]
+
+   for year ,yy in enumerate (yg, start=1 ):
+
+ 
+     money *=(1 + yy/100)
+     print(f"{year}. yıl:{money:.2f}")
 
     
 aa=url.corr()
