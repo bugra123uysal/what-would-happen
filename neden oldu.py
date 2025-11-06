@@ -2,8 +2,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import requests 
+import streamlit as st
+url=pd.read_excel("C:\\Users\\buğra\\Desktop\\ne-olur\\hisseler_google_finance (6).xlsx", header=1)
 
-url=pd.read_excel("C:\\Users\\buğra\\Desktop\\ne-olur\\hisseler_google_finance.xlsx")
+one_hun=[]
 
 """ 
 
@@ -11,9 +13,9 @@ hkodu=['Close', 'MSFT', 'AMZN', 'NVDA', 'META', 'GOOG', 'TSLA', 'PEP',
        'COST', 'AVGO', 'ADBE', 'NFLX', 'JPM', 'V', 'JNJ', 'UNH', 'XOM', 'NEE',
        'WMT', 'NKE', 'CAT', 'LMT', 'ASML', 'TSM', 'GS', 'PFE', 'SBUX', 'AMD'] 
  """
-print(url.columns.str.strip())
+print(url.columns)
 """ aapl  """
-tarih=url['Date']
+tarih=url["Date"]
 url['TSLA']=url['TSLA'].fillna(method='ffill')
 url['AMZN']=url['AMZN'].fillna(method='ffill')
 print(url.isnull().sum())
@@ -33,7 +35,7 @@ for hk in hkodu:
 
    
    """ 1 yıllık """
-   fi_1=url[(url['Date'] >='2024-10-28') &(url['Date'] <='2025-10-28')]
+   fi_1=url[(url["Date"] >='2024-10-28') &(url['Date'] <='2025-10-28')]
    ilkk=fi_1[hk].iloc[0]
    sonn=fi_1[hk].iloc[-1]
 
@@ -73,25 +75,40 @@ for hk in hkodu:
 
 
    print(f"4 yıllık : {fi_4_yüz:.2f}%")
-
-   """ 
+   
    sns.lineplot(x='Date' ,y=hk , data=url)
    plt.title(f"{hk} hisse senedi 2020-2025")
    plt.show()
-    """
+    
    """ paraya ne olur   1000$"""
 
    money=1000
    """ yg:yıllık getiri """
    yg=[fi_1_yüz ,fi_2_yüz,  fi_3_yüz, fi_4_yüz,  fi_5_yüz]
 
-   for year ,yy in enumerate (yg, start=1 ):
+   for  yy in yg:
 
  
      money *=(1 + yy/100)
-     print(f"{year}. yıl:{money:.2f}")
+     print(f"{yy}. yıl:{money:.2f}")
 
-    
+     one_hun.append({
+     "Hisse": hk,
+     "1 yıllık(%)":round(fi_1_yüz,2),
+     "2 yıllık(%)":round(fi_2_yüz,2),
+     "3 yıllık(%)":round(fi_3_yüz,2),
+     "4 yıllık(%)":round(fi_4_yüz,2),
+     "5 yıllık(%)":round(fi_5_yüz,2),
+     " 1000 dollara ne oldu(%)": round(money,2),
+        
+     })
+
+snc=pd.DataFrame(one_hun)
+snc.to_excel("C:\\Users\\buğra\\Desktop\\ne-olur\\1000_dollar.xlsx", index=False)
+
+
+
+
 aa=url.corr()
 gg=aa[(aa > 0.6) & (aa < 1)]
 
