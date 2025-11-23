@@ -20,39 +20,15 @@ url["Date"]=pd.to_datetime(url['Date'])
 
 print(url.isnull().sum())
 
-""" bileşik faiz """
+
+
  
 hıs_bılgı=['Volume', 'Marketcap', 'Pe', 'Eps', 'Günlük_Değişim',
        'Hisse_adet', 'Beta', '52 haftalık en yüksek fiyat',
        '52 haftalık en düşük fiyat']
 
-"""  açılı menü """
 
-""" bütce """
-main_money = [1000, 2000, 5000, 10000, 15000, 20000, 25000, 30000, 35000, 100000, 150000]
-m_money=st.selectbox("ana para seçiniz", main_money)
-
-""" yıllık getiri  """
-yıllık_getiri=[0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.90, 1.00]
-y_getiri=st.selectbox("Getiri seçini:",yıllık_getiri)
-
-""" yıl """
-
-yıl = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-
-yyyıl=st.selectbox("süre seçiniz", yıl)
-
-"""  bileşik faiz hesapmlam  """
-
-bileşik=m_money *(1 + y_getiri) ** yyyıl
-
-
-
-
-if st.button("send ballons"):
-  st.write(bileşik)
-  st.balloons()
-
+""" hisse seçeme """
 hk=st.selectbox(":", hkodu)
 url[hk]=url[hk].fillna(method='ffill')
 #1 yıllık 
@@ -124,3 +100,54 @@ gg=aa[(aa > 0.6) & (aa < 1)]
 
 print(gg.stack())
 
+
+"""  açılı menü """
+
+# bütce
+main_money = [1000, 2000, 5000, 10000, 15000, 20000, 25000, 30000, 35000, 100000, 150000]
+m_money=st.selectbox("ana para seçiniz", main_money)
+
+# yıllık getiri  
+yıllık_getiri=[0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.90, 1.00]
+y_getiri=st.selectbox("Getiri seçini:",yıllık_getiri)
+
+# yıl 
+
+yıl= [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+yyyıl=st.selectbox("süre seçiniz", yıl)
+
+# bileşik faiz hesaplama  
+
+bileşik=m_money *(1 + y_getiri) ** yyyıl
+
+
+
+yuzde=yıllık_getiri*100
+
+
+
+
+if st.button("hesapla"):
+  fig , ax=plt.subplots()
+  st.write(bileşik)
+  st.balloons()
+ 
+  sns.lineplot(x=yıl, y=bileşik)
+  ax.set_title(f"{m_money} dolar ı %{y_getiri} getiri ile {yyyıl} yılda bileşik faizle ne hale gelir in tablosu")
+  st.pyplot(fig)
+
+""" pörtföy """
+prfy=st.multiselect("Hisse senedi seçiniz", hkodu)
+tablo_prfy=[]
+for phisse in prfy:
+   adet=st.number_input(f"{phisse} hissesinin adetini giriniz:", min_value=0  )
+   sf=url[(url['Date'] >='2020-01-03') & (url['Date'] <= today )]
+   son_fiyat=url[phisse].iloc[-1]
+   hisse_degeri=adet*son_fiyat
+   tablo_prfy.append(f"{phisse}: {adet} değeri: {hisse_degeri}")
+ 
+
+
+my_portfö=pd.DataFrame(tablo_prfy)
+st.subheader("my pörtföy")
+st.dataframe(my_portfö)
