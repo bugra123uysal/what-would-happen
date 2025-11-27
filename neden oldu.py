@@ -80,7 +80,7 @@ ax.set_ylabel=("aa")
 plt.grid(True)
 st.pyplot(fig)
 
-
+""" 
 for  kh in hıs_bılgı:
     
    st.write(f"Hisse {hk}")
@@ -90,7 +90,7 @@ for  kh in hıs_bılgı:
    ax.set_ylabel(hıs_bılgı)
    st.pyplot(fig)
 
-
+ """
 """  birleşik getiri hesaplma """
 
 
@@ -122,9 +122,7 @@ bileşik=m_money *(1 + y_getiri) ** yyyıl
 
 
 
-yuzde=yıllık_getiri*100
-
-
+yuzde=y_getiri*100
 
 
 if st.button("hesapla"):
@@ -139,15 +137,26 @@ if st.button("hesapla"):
 """ pörtföy """
 prfy=st.multiselect("Hisse senedi seçiniz", hkodu)
 tablo_prfy=[]
+tpa=[]
 for phisse in prfy:
-   adet=st.number_input(f"{phisse} hissesinin adetini giriniz:", min_value=0  )
+   adet=st.number_input(f"{phisse} hissesinin adetini giriniz:", min_value=0 )
    sf=url[(url['Date'] >='2020-01-03') & (url['Date'] <= today )]
    son_fiyat=url[phisse].iloc[-1]
-   hisse_degeri=adet*son_fiyat
-   tablo_prfy.append(f"{phisse}: {adet} değeri: {hisse_degeri}")
- 
+   hisse_degeri=adet*son_fiyat   
+   tablo_prfy.append({"{phisse}":adet,
+                       "değeri":hisse_degeri
+                                                      })
+   
 
 
 my_portfö=pd.DataFrame(tablo_prfy)
 st.subheader("my pörtföy")
 st.dataframe(my_portfö)
+if st.button("pörtföyü oluştur"):
+    pporföy=0
+    pporföy +=my_portfö["değeri"].sum()
+    st.write(f"toplam:{pporföy:.2f} USD")
+    plt.pie(pporföy, labels=adet, autopct="%1.1%%" )
+    fig , ax=plt.subplots()
+    st.pyplot(fig)
+
