@@ -68,7 +68,7 @@ Pandas – Veri okuma ve hesaplama
 Google Sheets (CSV Export) – Dinamik veri kaynağı
 
 
-<img width="862" height="787" alt="Ekran görüntüsü 2025-11-24 004245" src="https://github.com/user-attachments/assets/1a24fdc3-e1e6-41bb-bd24-fd4a5487d6ba" />
+
 
 
 
@@ -86,5 +86,6 @@ Google Sheets (CSV Export) – Dinamik veri kaynağı
 Geliştirici
 
 Mesut Buğra Uysal
-GitHub: https://github.com/bugra123uysal
+GitHub: https://github.com/bugra123uysal 
+
 Linkedin:https://www.linkedin.com/in/mesut-bu%C4%9Fra-uysal-16a1bb288/
