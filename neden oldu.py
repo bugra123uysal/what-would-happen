@@ -1,11 +1,11 @@
 import pandas as pd
 import streamlit as st
-
+import matplotlib.pyplot as plt
 
 
 """ veri seti e tablo """
-sheed_id="*****"
-sheed_name="**"
+sheed_id="*******_"
+sheed_name="*****"
 aa=f"https://docs.google.com/spreadsheets/d/{sheed_id}/gviz/tq?tqx=out:csv&sheet={sheed_name}"
 
 url=pd.read_csv(aa)
@@ -42,7 +42,9 @@ for myprfy in port:
          "hisse":myprfy ,
          "adet":adet,
          "fiyat": fıı,
-         "değeri":h_degeri
+         "değeri":h_degeri,
+         
+
     })  
 
     except:
@@ -57,19 +59,35 @@ st.dataframe(my_p)
 if st.button("oluştur"):
     
    
-    pörtföy=0
-    pörtföy+= my_p["değeri"].sum()
+   
+    pörtföy= my_p["değeri"].sum()
+
     st.write(f"toplam değer: {pörtföy}")
+
+    my_p["dağılım %"]=(my_p["değeri"] / pörtföy)*100
+
+    st.dataframe(my_p)
+
+    fig, ax =plt.subplots()
+    ax.pie(my_p["dağılım %"] , autopct="%1.1f%%" )
+    
+    st.pyplot(fig)
+
+
+
+    
+
+  
+    
     st.balloons()
 
+""" bileşik faiz hesaplama """
 
-st.title("bileşik faiz hesaplama")
+""" anapara """
+ana_p=st.number_input("anapara",min_value=0)
 
-
-ana_p=st.number_input("anapara",min_value=0) # anapara hesaplama
-
- 
-bekleme=st.number_input("vade süresi", min_value=0) #vade süresi süre
+""" vade süresi süre """
+bekleme=st.number_input("vade süresi", min_value=0)
 """ yüzde değişimi """
 yze=[0.10,0.20,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1.00]
 yüzde=st.selectbox("yüzdesel değişimi şeçiniz: " ,yze)
