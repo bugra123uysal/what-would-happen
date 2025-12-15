@@ -83,6 +83,10 @@ Google Sheets (CSV Export) – Dinamik veri kaynağı
 
 <img width="687" height="332" alt="Ekran görüntüsü 2025-12-13 225135" src="https://github.com/user-attachments/assets/dba55a71-d1c6-4416-9459-43258879d70c" />
 
+<img width="564" height="689" alt="Ekran görüntüsü 2025-12-16 014238" src="https://github.com/user-attachments/assets/f3931bf0-6a6f-40f8-a6e2-4d4ce833ab4f" />
+
+
+
 Geliştirici
 
 Mesut Buğra Uysal
