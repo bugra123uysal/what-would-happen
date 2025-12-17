@@ -4,15 +4,15 @@ import matplotlib.pyplot as plt
 
 
 """ veri seti e tablo """
-sheed_id="*******_"
-sheed_name="*****"
+sheed_id="1rpPfUqH85VJNk46apbkWYelprYiAPKw_"
+sheed_name="ecl"
 aa=f"https://docs.google.com/spreadsheets/d/{sheed_id}/gviz/tq?tqx=out:csv&sheet={sheed_name}"
 
 url=pd.read_csv(aa)
 url["fiyat"]=url["fiyat"].astype(str).str.replace(",",".")
 url["fiyat"]=pd.to_numeric(url["fiyat"], errors="coerce")
 
-
+print(url.columns)
 
 
 st.write("merhaba pörtföy")
@@ -36,11 +36,14 @@ for myprfy in port:
     try:
         fıı=url.loc[url['Adı'] == myprfy, 'fiyat'].iloc[-1]
         adet=int(st.number_input(f"{myprfy} hissesi adetini giriniz:", min_value=0))
+        sektör=url.loc[url["Adı"]==myprfy, "sektör"].iloc[0] 
+        
        
         h_degeri= adet * fıı
         pppört.append({
          "hisse":myprfy ,
          "adet":adet,
+         "sektör": sektör,
          "fiyat": fıı,
          "değeri":h_degeri,
          
@@ -51,8 +54,6 @@ for myprfy in port:
         fıı=0
     
 
-    
-    
    
 my_p=pd.DataFrame(pppört)
 st.dataframe(my_p)
@@ -69,13 +70,17 @@ if st.button("oluştur"):
     st.dataframe(my_p)
 
     fig, ax =plt.subplots()
-    ax.pie(my_p["dağılım %"] , autopct="%1.1f%%" )
+    ax.pie(my_p["dağılım %"], autopct="%1.1f%%" ,labels=my_p["hisse"] )
     
     st.pyplot(fig)
 
 
+    fig, ax=plt.subplots()
+    ax.plot(my_p.index, my_p["5-yıllık"] )
+    ax.grid(True)
+    st.pyplot(fig)
 
-    
+
 
   
     
@@ -99,11 +104,3 @@ if st.button("hesapla"):
 
      st.balloons()
 
-
-
-
-
- 
-
-
-    
