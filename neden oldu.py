@@ -1,12 +1,16 @@
+
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
-
+import google.generativeai as genai
+import os 
 
 """ veri seti e tablo """
-sheed_id="1rpPfUqH85VJNk46apbkWYelprYiAPKw_"
-sheed_name="ecl"
+sheed_id="****"
+sheed_name="**"
 aa=f"https://docs.google.com/spreadsheets/d/{sheed_id}/gviz/tq?tqx=out:csv&sheet={sheed_name}"
+
+
 
 url=pd.read_csv(aa)
 url["fiyat"]=url["fiyat"].astype(str).str.replace(",",".")
@@ -37,7 +41,12 @@ for myprfy in port:
         fıı=url.loc[url['Adı'] == myprfy, 'fiyat'].iloc[-1]
         adet=int(st.number_input(f"{myprfy} hissesi adetini giriniz:", min_value=0))
         sektör=url.loc[url["Adı"]==myprfy, "sektör"].iloc[0] 
-        
+        ppee=url.loc[url["Adı"]==myprfy , "pe_oranı"].iloc[0]
+        ffor=url.loc[url["Adı"]==myprfy    ,"forward_pe"].iloc[0]
+        kar=url.loc[url["Adı"]== myprfy, "kar_marjı"].iloc[0]
+        eeps=url.loc[url["Adı"]==myprfy,"eps"].iloc[0]
+
+         
        
         h_degeri= adet * fıı
         pppört.append({
@@ -46,6 +55,11 @@ for myprfy in port:
          "sektör": sektör,
          "fiyat": fıı,
          "değeri":h_degeri,
+         "pe":ppee,
+         "forward":ffor,
+         "kar":kar,
+         "eps":eeps
+
          
 
     })  
@@ -70,21 +84,38 @@ if st.button("oluştur"):
     st.dataframe(my_p)
 
     fig, ax =plt.subplots()
-    ax.pie(my_p["dağılım %"], autopct="%1.1f%%" ,labels=my_p["hisse"] )
+    ax.pie(my_p["dağılım %"], autopct="%1.1f%%" ,labels=my_p["hisse"])
     
     st.pyplot(fig)
 
-
+     
     fig, ax=plt.subplots()
-    ax.plot(my_p.index, my_p["5-yıllık"] )
+    ax.plot(url.index, url["5-yıllık"] )
     ax.grid(True)
     st.pyplot(fig)
 
 
 
+    #indirme bölümü 
+    st.download_button("indir (excel)", my_p.to_csv(index=True) , "pörtföy.csv")
+
+    
   
     
     st.balloons()
+
+genai.configure(api_key="AIzaSyDHi5SURhRCdyNRin9yLvfD6vHFD0rJlFk")
+
+model= genai.GenerativeModel("models/gemini-1.5-flash")
+
+sor=st.text_input("nasıl yardımcı olabilirim : NVDA hakkında bilgi verirmisin ? ")
+
+if st.button("sor"):
+    prompt="Borsada uzun vadeli yatırım nedir? "
+
+    ad=model.generate_content(prompt)
+    st.write(ad.text)
+
 
 """ bileşik faiz hesaplama """
 
