@@ -1,13 +1,12 @@
-
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
-import google.generativeai as genai
+from google import genai
 import os 
 
 """ veri seti e tablo """
 sheed_id="****"
-sheed_name="**"
+sheed_name="ecl"
 aa=f"https://docs.google.com/spreadsheets/d/{sheed_id}/gviz/tq?tqx=out:csv&sheet={sheed_name}"
 
 
@@ -94,27 +93,30 @@ if st.button("oluştur"):
     ax.grid(True)
     st.pyplot(fig)
 
-
-
     #indirme bölümü 
     st.download_button("indir (excel)", my_p.to_csv(index=True) , "pörtföy.csv")
 
     
-  
-    
     st.balloons()
 
-genai.configure(api_key="AIzaSyDHi5SURhRCdyNRin9yLvfD6vHFD0rJlFk")
+# chat bot bölümü
 
-model= genai.GenerativeModel("models/gemini-1.5-flash")
 
-sor=st.text_input("nasıl yardımcı olabilirim : NVDA hakkında bilgi verirmisin ? ")
+client=genai.Client(api_key="*****")
+    
+sor=st.chat_input("sor:")
+if sor:
+  if sor.lower() in ["çık","out","bırak"]:
+    st.stop()
+        
+  cevap=client.models.generate_content(
+  model="gemini-2.0-flash",
+  contents=sor
+  )
+  st.write("cevap:", cevap.text)
+  st.caption("burdaki yazılanlar yatırım tavsiyesi değildir bilgileri kontrol ediniz !!!!")
+    
 
-if st.button("sor"):
-    prompt="Borsada uzun vadeli yatırım nedir? "
-
-    ad=model.generate_content(prompt)
-    st.write(ad.text)
 
 
 """ bileşik faiz hesaplama """
@@ -134,4 +136,3 @@ if st.button("hesapla"):
      st.write("sonuç:",bileşik_f)
 
      st.balloons()
-
