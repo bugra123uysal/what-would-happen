@@ -59,15 +59,15 @@ Bileşik faiz formülü kullanılarak sermayenin zaman içindeki potansiyel büy
 
 🧠 Kullanılan Teknolojiler
 
-Python 3.9+
+📌 Python 3.9+
 
-Streamlit – Etkileşimli web arayüzü
+📌 Streamlit – Etkileşimli web arayüzü
 
-Pandas – Veri okuma ve hesaplama
+📌 Pandas – Veri okuma ve hesaplama
 
-Google Sheets (CSV Export) – Dinamik veri kaynağı
+📌 Google Sheets (CSV Export) – Dinamik veri kaynağı
 
-
+📌 Gemini için Google AI Studio API'sinden bir api anahtarı satın alarak Gemini'yi uygulamama entegre ettim.
 
 
 
