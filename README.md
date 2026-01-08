@@ -1,77 +1,105 @@
-📊 Portföy Simülasyonu ve Bileşik Faiz Hesaplama Uygulaması
 
-Bu proje, Streamlit kullanılarak geliştirilmiş, kullanıcıların gerçek para kullanmadan kendi yatırım stratejilerini test edebilecekleri bir portföy simülasyonu uygulamasıdır.
 
-Uygulamanın temel amacı, kullanıcıların:
+📊 What Would Happen
 
-Farklı hisse senedi kombinasyonları oluşturmasını
+What Would Happen, kullanıcıların gerçek para riske etmeden yatırım stratejileri oluşturabildiği, bu stratejileri farklı yatırımlar ve endekslerle karşılaştırabildiği ve sonuçları görseller üzerinden analiz edebildiği deneysel bir finans simülasyon projesidir.
 
-Seçilen hisselere göre portföy değerini simüle etmesini
-
-Sermaye büyümesini bileşik faiz mantığıyla analiz etmesini
-
-sağlayarak finansal farkındalık ve yatırım okuryazarlığı kazandırmaktır.
+Bu proje bir yatırım ürünü değildir.
+Amaç,  yatırım verisiyle çalışma, karşılaştırma ve analiz altyapısı kurmaktır.
 
 🎯 Projenin Amacı
 
-Bu uygulama, yatırım dünyasına ilgi duyan kullanıcıların:
+Bu projenin temel amacı:
 
-📌 Gerçek piyasa verilerine dayalı portföyler oluşturmasını
+İnsanların gerçek para kullanmadan,
+kendi yatırım stratejilerini oluşturabilmeleri,
+bu stratejileri diğer yatırımlarla karşılaştırabilmeleri
+ve bu karşılaştırmaları görsel olarak net şekilde görebilmeleri.
 
-📌 Risk almadan farklı senaryoları test etmesini
+Bu projede:
 
-📌 "Eğer şu hisseye bu kadar yatırım yapsaydım ne olurdu?" sorusuna cevap bulmasını
+- Gerçek alım–satım yok
 
-📌 Uzun vadeli yatırımın bileşik faiz etkisini somut olarak görmesini
+- Para riski yok
 
-amaçlayan eğitsel ve simülasyon odaklı bir projedir.
+- Yatırım tavsiyesi yok
 
-❗ Uygulama herhangi bir alım–satım işlemi gerçekleştirmez ve gerçek yatırım aracı değildir.
-
-🚀 Temel Özellikler
-📈 Portföy Simülasyonu
-
-Google Sheets üzerinden çekilen güncel hisse fiyatları kullanılır
-
-Kullanıcı dilediği kadar hisse seçebilir
-
-Her hisse için adet bilgisi girilir
-
-Sistem otomatik olarak:
-
-Hisse bazlı toplam değeri
-
-Portföyün toplam büyüklüğünü hesaplar
-
-Tüm sonuçlar tablo formatında kullanıcıya sunulur
-
-💰 Bileşik Faiz Analizi
-
-Kullanıcı:
-
-Anapara
-
-Vade süresi
-
-Tahmini getiri oranı değerlerini girer
-
-Bileşik faiz formülü kullanılarak sermayenin zaman içindeki potansiyel büyümesi hesaplanır
-
-🧠 Kullanılan Teknolojiler
-
-📌 Python 3.9+
-
-📌 Streamlit – Etkileşimli web arayüzü
-
-📌 Pandas – Veri okuma ve hesaplama
-
-📌 Google Sheets (CSV Export) – Dinamik veri kaynağı
-
-📌 Gemini için Google AI Studio API'sinden bir api anahtarı satın alarak Gemini'yi uygulamama entegre ettim.
+Sadece senaryo, karşılaştırma ve analiz vardır.
 
 
+🔄 Veri Akışı
+
+Veri akışı bilinçli olarak iki aşamalıdır:
+
+- Hisse ve endeks verileri yfinance kullanılarak çekilir
+
+- Bu veriler Google Sheets üzerine aktarılır
+
+- Uygulama, veriyi Google Sheets (CSV endpoint) üzerinden okur
+
+Bu yapı:
+
+- Gerçek zamanlı değildir
+
+- Manuel / yarı otomatik bir çözümdür
+
+- Öğrenme ve kontrol odaklıdır
+
+- Amaç, otomasyondan önce  veriyle çalışma disiplinini kazanmaktır.
+
+🛠️ Mevcut Özellikler
+📌 Portföy ve Strateji Oluşturma
+
+- Kullanıcı hisse seçer
+
+- Her hisse için adet girer
+
+fiyatlara göre:
+
+- Hisse değeri
+
+- Toplam portföy değeri hesaplanır
+
+📌 Temel Finansal Metrikler
+
+Her hisse için:
+
+- EPS
+
+- Forward PE
+
+- Beta
+
+- Kar marjı
+
+- 1–5 yıllık getiriler
+
+Bu metrikler yorumdan çok karşılaştırma amacıyla sunulur.
+
+Bu yapı, kullanıcının kendi stratejisini sayısal olarak görmesini sağlar.
 
 
+📊 Görsel Karşılaştırmalar
+
+- Portföy dağılımı (pasta grafiği)
+
+
+- EPS karşılaştırması (devam ediyor)
+
+- Forward PE karşılaştırması  (devam ediyor)
+- Yıllık getiri karşılaştırması   (devam ediyor)
+- başka Finansal Metriklerin görselleştirilmesi gelecek 
+
+  Chatbot (Deneme Aşamasında)
+
+- Gemini API ile entegredir
+
+- Şu an tamamlanmış bir özellik değildir
+
+- Deneme ve öğrenme amaçlıdır
+
+- Finansal doğruluk garanti edilmez
+ 
 #compound return
 
 
@@ -85,6 +113,7 @@ Bileşik faiz formülü kullanılarak sermayenin zaman içindeki potansiyel büy
 
 <img width="564" height="689" alt="Ekran görüntüsü 2025-12-16 014238" src="https://github.com/user-attachments/assets/f3931bf0-6a6f-40f8-a6e2-4d4ce833ab4f" />
 
+<img width="1917" height="712" alt="Ekran görüntüsü 2026-01-04 002537" src="https://github.com/user-attachments/assets/884e716b-f081-43dd-8c16-ab1ee4204179" />
 
 
 Geliştirici
