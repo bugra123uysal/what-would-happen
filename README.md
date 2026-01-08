@@ -107,7 +107,6 @@ Bu yapı, kullanıcının kendi stratejisini sayısal olarak görmesini sağlar.
 
 
 #portfolio
-<img width="622" height="261" alt="Ekran görüntüsü 2025-12-13 225152" src="https://github.com/user-attachments/assets/aae83d33-6864-46af-a5e1-7aed244fde44" />
 
 <img width="687" height="332" alt="Ekran görüntüsü 2025-12-13 225135" src="https://github.com/user-attachments/assets/dba55a71-d1c6-4416-9459-43258879d70c" />
 
@@ -115,6 +114,21 @@ Bu yapı, kullanıcının kendi stratejisini sayısal olarak görmesini sağlar.
 
 <img width="1917" height="712" alt="Ekran görüntüsü 2026-01-04 002537" src="https://github.com/user-attachments/assets/884e716b-f081-43dd-8c16-ab1ee4204179" />
 
+ # getiriler
+<img width="979" height="745" alt="Ekran görüntüsü 2026-01-09 004500" src="https://github.com/user-attachments/assets/f1fbc2a0-841e-48c4-a647-6ed8e758c847" />
+
+<img width="995" height="746" alt="Ekran görüntüsü 2026-01-09 012208" src="https://github.com/user-attachments/assets/a0318103-3f37-4eab-8952-fa24499faf42" />
+
+<img width="1089" height="756" alt="Ekran görüntüsü 2026-01-09 012215" src="https://github.com/user-attachments/assets/abc21b96-fcd6-46b5-b347-2cdd78c82197" />
+
+
+<img width="1015" height="748" alt="Ekran görüntüsü 2026-01-09 012224" src="https://github.com/user-attachments/assets/9a655182-b25e-4942-ae8e-782e889841c2" />
+
+
+<img width="1031" height="762" alt="Ekran görüntüsü 2026-01-09 012231" src="https://github.com/user-attachments/assets/1c4865f9-15f7-4137-a547-7c50f49965e9" />
+
+
+<img width="968" height="764" alt="Ekran görüntüsü 2026-01-09 012239" src="https://github.com/user-attachments/assets/d7384b99-205d-480a-a4fd-ee043109b9ee" />
 
 Geliştirici
 
