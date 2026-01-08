@@ -2,11 +2,10 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 from google import genai
-import os 
 
 """ veri seti e tablo """
-sheed_id="***************"
-sheed_name="*****"
+sheed_id="*******"
+sheed_name="***"
 aa=f"https://docs.google.com/spreadsheets/d/{sheed_id}/gviz/tq?tqx=out:csv&sheet={sheed_name}"
 
 
@@ -34,10 +33,11 @@ analiz=[]
 
 tumu=port + aaiz
 for myprfy in tumu:
+   
     
     try:
         fıı=url.loc[url['Adı'] == myprfy, 'fiyat'].iloc[-1]
-        adet=int(st.number_input(f"{myprfy} hissesi adetini giriniz:", min_value=0, key=f"adet_{myprfy}"))
+       
         sektör=url.loc[url["Adı"]==myprfy, "sektör"].iloc[0]
         ppee=url.loc[url["Adı"]==myprfy , "pe_oranı"].iloc[0]
         ffor=url.loc[url["Adı"]==myprfy    ,"forward_pe"].iloc[0]
@@ -51,10 +51,15 @@ for myprfy in tumu:
         yıl_3=url.loc[url["Adı"]==myprfy,"3-yıl"].iloc[0] 
         yıl_4=url.loc[url["Adı"]==myprfy,"4-yıl"].iloc[0] 
 
+        if myprfy in aaiz:
+             adet=1
+             h_degeri=0
+        else:
        
-
-       
-        h_degeri= adet * fıı
+            adet=int(st.number_input(f"{myprfy} hissesi adetini giriniz:", min_value=0, key=f"adet_{myprfy}"))
+            h_degeri= adet * fıı
+  
+        
         pppört.append({
          "hisse":myprfy ,
          "adet":adet,
@@ -66,11 +71,8 @@ for myprfy in tumu:
          "kar":kar,
          "eps":eeps,
          "beta":beta,
-         "5_yıllık_getiri":yıl_5,
-         "4_yıllık_getiri":yıl_4,
-         "3_yıllık_getiri":yıl_3,
-         "2_yıllık_getiri":yıl_2,
-         "1_yıllık_getiri":yıl_1
+         
+        
       
 
     })
@@ -87,18 +89,10 @@ for myprfy in tumu:
              
              
              }) 
+        
     
-        
-        
-
-
-       
-
     except:
         fıı=0
-
-
-
 
 
     
@@ -110,12 +104,75 @@ st.dataframe(my_p)
 aa=pd.DataFrame(analiz)
 st.dataframe(aa)
 
+st.write("merhaba oluşturduğunuz portföy  yıllık getiri karşılaştırmasında 1 yılllık yatırımda ")
+
+#for endeks in aaiz:  if endeks > 
 
 
 if st.button("oluştur"):
-    # getiri   
-    
-    
+    # portföy getirileri  
+    portfoy_getirisi_1=((my_p["değeri"] * aa["1_yıllık_getiri"]).sum() / my_p["değeri"].sum())
+    portfoy_getirisi_2=((my_p["değeri"] * aa["2_yıllık_getiri"]).sum() / my_p["değeri"].sum())
+    portfoy_getirisi_3=((my_p["değeri"] * aa["3_yıllık_getiri"]).sum() / my_p["değeri"].sum())
+    portfoy_getirisi_4=((my_p["değeri"] * aa["4_yıllık_getiri"]).sum() / my_p["değeri"].sum())
+    portfoy_getirisi_5=((my_p["değeri"] * aa["5_yıllık_getiri"]).sum() / my_p["değeri"].sum())
+    aaiz=["SPY","QQQ","DIA","IWM","VTI","IJH","XLK","XLF","XLV","XLE","XLY"]
+   
+   
+    # 1 yıllık getiri
+    st.write(f"portföy getirisi 1 yılda { portfoy_getirisi_1:.2f} getiri sağlamışdır")
+    fig, ax=plt.subplots()
+    ax.set_title("1 yıllık getiri")
+    ax.barh(my_p["hisse"], aa["1_yıllık_getiri"])
+    ax.axvline(portfoy_getirisi_1 , linestyle="--", label="portföy_getirisi")
+    ax.grid(True)
+    ax.legend()
+    st.pyplot(fig)
+
+
+    # 2 yıllık getiri
+    st.write(f"portföy getirisi 2 yılda {portfoy_getirisi_2} getiri sağladı")
+    fig , ax=plt.subplots()
+    ax.set_title("2 yıllık getiri")
+    ax.barh(my_p["hisse"], aa["2_yıllık_getiri"])
+    ax.axvline(portfoy_getirisi_2 , linestyle="--" , label="portföy getirisi")
+    ax.grid(True)
+    ax.legend()
+    st.pyplot(fig)
+
+    # 3 yıllık getiri
+    st.write(f"portföy getirisi 3 yılda {portfoy_getirisi_3} getiri sağladı")
+    fig , ax=plt.subplots()
+    ax.set_title("3 yıllık getiri")
+    ax.barh(my_p["hisse"], aa["3_yıllık_getiri"])
+    ax.set_title("3 yıllık getiri")
+    ax.axvline(portfoy_getirisi_3 , linestyle="--", label="portföy getirisi")
+    ax.grid(True)
+    ax.legend()
+    st.pyplot(fig)
+ 
+ # 4 yıllık getiri
+    st.write(f"portföy getirisi 4 yılda {portfoy_getirisi_4} getiri sağladı")
+
+    fig , ax=plt.subplots()
+    ax.set_title("4 yıllık getiri")
+    ax.barh(my_p["hisse"], aa["4_yıllık_getiri"])
+    ax.axvline(portfoy_getirisi_4 , linestyle="--", label="portföy getirisi")
+    ax.grid(True)
+    ax.legend()
+    st.pyplot(fig)
+ 
+# 5 yıllık getiri
+    st.write(f"portföy getirisi 5 yılda {portfoy_getirisi_5} getiri sağladı")
+
+    fig , ax=plt.subplots()
+    ax.set_title("5 yıllık getiri")
+    ax.barh(my_p["hisse"], aa["5_yıllık_getiri"])
+    ax.axvline(portfoy_getirisi_5 , linestyle="--", label="portföy getirisi")
+    ax.grid(True)
+    ax.legend()
+    st.pyplot(fig)
+ 
     
     pörtföy= my_p["değeri"].sum()
 
@@ -142,9 +199,6 @@ if st.button("oluştur"):
     st.pyplot(fig)
 
 
-
-
-    
     #indirme bölümü 
     st.download_button("indir (excel)", my_p.to_csv(index=True) , "pörtföy.csv")
 
@@ -166,6 +220,3 @@ if sor:
   )
   st.write("cevap:", cevap.text)
   st.caption("burdaki yazılanlar yatırım tavsiyesi değildir bilgileri kontrol ediniz !!!!")
-
-
-
