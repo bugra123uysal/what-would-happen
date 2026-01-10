@@ -2,10 +2,12 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 from google import genai
+import requests
+import os 
 
 """ veri seti e tablo """
-sheed_id="*******"
-sheed_name="***"
+sheed_id="*********"
+sheed_name="********"
 aa=f"https://docs.google.com/spreadsheets/d/{sheed_id}/gviz/tq?tqx=out:csv&sheet={sheed_name}"
 
 
@@ -104,10 +106,6 @@ st.dataframe(my_p)
 aa=pd.DataFrame(analiz)
 st.dataframe(aa)
 
-st.write("merhaba oluşturduğunuz portföy  yıllık getiri karşılaştırmasında 1 yılllık yatırımda ")
-
-#for endeks in aaiz:  if endeks > 
-
 
 if st.button("oluştur"):
     # portföy getirileri  
@@ -120,55 +118,76 @@ if st.button("oluştur"):
    
    
     # 1 yıllık getiri
-    st.write(f"portföy getirisi 1 yılda { portfoy_getirisi_1:.2f} getiri sağlamışdır")
+    # 1 yıllık analiz için karşılaştırma 
+    geçti_1= aa[aa["1_yıllık_getiri"] > portfoy_getirisi_1]
+
+    adet_1=len(geçti_1)
+
+    st.write(f"portföy getirisi 1 yılda { portfoy_getirisi_1:.2f} getiri sağlamışdır  portföy getirisini {adet_1} tane geçen yatırım vardır o da {geçti_1["hisse"].tolist()} yatırımıdır")
     fig, ax=plt.subplots()
     ax.set_title("1 yıllık getiri")
     ax.barh(my_p["hisse"], aa["1_yıllık_getiri"])
-    ax.axvline(portfoy_getirisi_1 , linestyle="--", label="portföy_getirisi")
+    ax.axvline(portfoy_getirisi_1 , linestyle="--", color="red" ,label="portföy_getirisi")
     ax.grid(True)
     ax.legend()
     st.pyplot(fig)
 
 
     # 2 yıllık getiri
-    st.write(f"portföy getirisi 2 yılda {portfoy_getirisi_2} getiri sağladı")
+    geçti_2= aa[aa["2_yıllık_getiri"] > portfoy_getirisi_2]
+    adet_2=len(geçti_2)
+
+
+
+
+    st.write(f"portföy getirisi 2 yılda {portfoy_getirisi_2} getiri sağlamışdır portföy getirisi {adet_2} tane geçen yatırım vardır o da {geçti_2["hisse"].tolist()} yatırımıdır  ")
     fig , ax=plt.subplots()
     ax.set_title("2 yıllık getiri")
     ax.barh(my_p["hisse"], aa["2_yıllık_getiri"])
-    ax.axvline(portfoy_getirisi_2 , linestyle="--" , label="portföy getirisi")
+    ax.axvline(portfoy_getirisi_2 , linestyle="--" , color="red" ,label="portföy getirisi")
     ax.grid(True)
     ax.legend()
     st.pyplot(fig)
 
     # 3 yıllık getiri
-    st.write(f"portföy getirisi 3 yılda {portfoy_getirisi_3} getiri sağladı")
+    geçti_3=aa[aa["3_yıllık_getiri"] > portfoy_getirisi_3]
+    adet_3=len(geçti_3)
+
+    st.write(f"portföy getirisi 3 yılda {portfoy_getirisi_3} getiri sağlamışdır  {adet_3} tane geçen  yatırım vardır o da {geçti_3["hisse"].tolist()} yatırımıdır")
     fig , ax=plt.subplots()
     ax.set_title("3 yıllık getiri")
     ax.barh(my_p["hisse"], aa["3_yıllık_getiri"])
     ax.set_title("3 yıllık getiri")
-    ax.axvline(portfoy_getirisi_3 , linestyle="--", label="portföy getirisi")
+    ax.axvline(portfoy_getirisi_3 , linestyle="--", color="red" , label="portföy getirisi")
     ax.grid(True)
     ax.legend()
     st.pyplot(fig)
  
- # 4 yıllık getiri
-    st.write(f"portföy getirisi 4 yılda {portfoy_getirisi_4} getiri sağladı")
+    # 4 yıllık getiri
+    geçti_4=aa[aa["4_yıllık_getiri"] > portfoy_getirisi_4]
+    adet_4=len(geçti_4)
+
+    st.write(f"portföy getirisi 4 yılda {portfoy_getirisi_4} getiri sağlamışdır  {adet_4} tane  geçen yatırım vardır o da {geçti_4["hisse"].tolist()} yatırımıdır ")
 
     fig , ax=plt.subplots()
     ax.set_title("4 yıllık getiri")
     ax.barh(my_p["hisse"], aa["4_yıllık_getiri"])
-    ax.axvline(portfoy_getirisi_4 , linestyle="--", label="portföy getirisi")
+    ax.axvline(portfoy_getirisi_4 , linestyle="--", color="red" ,label="portföy getirisi")
     ax.grid(True)
     ax.legend()
     st.pyplot(fig)
  
 # 5 yıllık getiri
-    st.write(f"portföy getirisi 5 yılda {portfoy_getirisi_5} getiri sağladı")
+    geçti_5=aa[aa["5_yıllık_getiri"] > portfoy_getirisi_5]
+    adet_5=len(geçti_5)
+
+    
+    st.write(f"portföy getirisi 5 yılda {portfoy_getirisi_5} getiri sağladı {adet_5} tane  geçen yatırım vardır o da {geçti_4["hisse"].tolist()} yatırımıdır")
 
     fig , ax=plt.subplots()
     ax.set_title("5 yıllık getiri")
     ax.barh(my_p["hisse"], aa["5_yıllık_getiri"])
-    ax.axvline(portfoy_getirisi_5 , linestyle="--", label="portföy getirisi")
+    ax.axvline(portfoy_getirisi_5 , linestyle="--", color="red" , label="portföy getirisi")
     ax.grid(True)
     ax.legend()
     st.pyplot(fig)
