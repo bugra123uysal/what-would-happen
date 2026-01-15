@@ -110,25 +110,29 @@ Bu yapı, kullanıcının kendi stratejisini sayısal olarak görmesini sağlar.
 
 <img width="687" height="332" alt="Ekran görüntüsü 2025-12-13 225135" src="https://github.com/user-attachments/assets/dba55a71-d1c6-4416-9459-43258879d70c" />
 
-<img width="564" height="689" alt="Ekran görüntüsü 2025-12-16 014238" src="https://github.com/user-attachments/assets/f3931bf0-6a6f-40f8-a6e2-4d4ce833ab4f" />
+
+
+<img width="896" height="743" alt="Ekran görüntüsü 2026-01-11 005822" src="https://github.com/user-attachments/assets/74f2c415-a1ab-4548-823f-32adc7c9acb7" />
+
 
 <img width="1917" height="712" alt="Ekran görüntüsü 2026-01-04 002537" src="https://github.com/user-attachments/assets/884e716b-f081-43dd-8c16-ab1ee4204179" />
 
  # getiriler
-<img width="979" height="745" alt="Ekran görüntüsü 2026-01-09 004500" src="https://github.com/user-attachments/assets/f1fbc2a0-841e-48c4-a647-6ed8e758c847" />
-
-<img width="995" height="746" alt="Ekran görüntüsü 2026-01-09 012208" src="https://github.com/user-attachments/assets/a0318103-3f37-4eab-8952-fa24499faf42" />
-
-<img width="1089" height="756" alt="Ekran görüntüsü 2026-01-09 012215" src="https://github.com/user-attachments/assets/abc21b96-fcd6-46b5-b347-2cdd78c82197" />
 
 
-<img width="1015" height="748" alt="Ekran görüntüsü 2026-01-09 012224" src="https://github.com/user-attachments/assets/9a655182-b25e-4942-ae8e-782e889841c2" />
+<img width="895" height="631" alt="Ekran görüntüsü 2026-01-11 005739" src="https://github.com/user-attachments/assets/d2e47a33-50ce-45b0-8736-dc797dd26b2a" />
 
 
-<img width="1031" height="762" alt="Ekran görüntüsü 2026-01-09 012231" src="https://github.com/user-attachments/assets/1c4865f9-15f7-4137-a547-7c50f49965e9" />
+<img width="857" height="630" alt="Ekran görüntüsü 2026-01-11 005748" src="https://github.com/user-attachments/assets/58a7525f-c5d8-44f8-abb7-b2b30a7f62b3" />
 
 
-<img width="968" height="764" alt="Ekran görüntüsü 2026-01-09 012239" src="https://github.com/user-attachments/assets/d7384b99-205d-480a-a4fd-ee043109b9ee" />
+<img width="868" height="634" alt="Ekran görüntüsü 2026-01-11 005756" src="https://github.com/user-attachments/assets/d3d26b3f-dd34-4f72-9ca2-7bc6c1eefe30" />
+
+<img width="861" height="632" alt="Ekran görüntüsü 2026-01-11 005804" src="https://github.com/user-attachments/assets/1ac5bc0a-6a16-4bfa-b9ba-830baf34a5af" />
+
+
+<img width="948" height="631" alt="Ekran görüntüsü 2026-01-11 005812" src="https://github.com/user-attachments/assets/dda497fe-aa95-4846-8284-bb47170c6c8d" />
+
 
 Geliştirici
 
