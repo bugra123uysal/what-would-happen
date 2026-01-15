@@ -6,10 +6,13 @@ import requests
 import os 
 
 """ veri seti e tablo """
-sheed_id="*********"
-sheed_name="********"
+sheed_id="****************"
+sheed_name="*****************"
 aa=f"https://docs.google.com/spreadsheets/d/{sheed_id}/gviz/tq?tqx=out:csv&sheet={sheed_name}"
 
+# sayfalar 
+st.sidebar.title("menü")
+st.sidebar.button("gemini")
 
 
 url=pd.read_csv(aa)
@@ -46,6 +49,7 @@ for myprfy in tumu:
         kar=url.loc[url["Adı"]== myprfy, "kar_marjı"].iloc[0]
         eeps=url.loc[url["Adı"]==myprfy,"eps"].iloc[0]
         beta=url.loc[url["Adı"]==myprfy, "beta"].iloc[0]
+
 
         yıl_5=url.loc[url["Adı"]==myprfy, "5-yıl"].iloc[0] 
         yıl_1=url.loc[url["Adı"]==myprfy,"1-yıl"].iloc[0] 
@@ -123,7 +127,7 @@ if st.button("oluştur"):
 
     adet_1=len(geçti_1)
 
-    st.write(f"portföy getirisi 1 yılda { portfoy_getirisi_1:.2f} getiri sağlamışdır  portföy getirisini {adet_1} tane geçen yatırım vardır o da {geçti_1["hisse"].tolist()} yatırımıdır")
+    st.write(f"portföy getirisi 1 yılda { portfoy_getirisi_1:.2f}%  getiri sağlamışdır  portföy getirisini {adet_1} tane geçen yatırım vardır o da {geçti_1["hisse"].tolist()} yatırımıdır")
     fig, ax=plt.subplots()
     ax.set_title("1 yıllık getiri")
     ax.barh(my_p["hisse"], aa["1_yıllık_getiri"])
@@ -140,7 +144,7 @@ if st.button("oluştur"):
 
 
 
-    st.write(f"portföy getirisi 2 yılda {portfoy_getirisi_2} getiri sağlamışdır portföy getirisi {adet_2} tane geçen yatırım vardır o da {geçti_2["hisse"].tolist()} yatırımıdır  ")
+    st.write(f"portföy getirisi 2 yılda {portfoy_getirisi_2}%  getiri sağlamışdır portföy getirisi {adet_2} tane geçen yatırım vardır o da {geçti_2["hisse"].tolist()} yatırımıdır  ")
     fig , ax=plt.subplots()
     ax.set_title("2 yıllık getiri")
     ax.barh(my_p["hisse"], aa["2_yıllık_getiri"])
@@ -153,7 +157,7 @@ if st.button("oluştur"):
     geçti_3=aa[aa["3_yıllık_getiri"] > portfoy_getirisi_3]
     adet_3=len(geçti_3)
 
-    st.write(f"portföy getirisi 3 yılda {portfoy_getirisi_3} getiri sağlamışdır  {adet_3} tane geçen  yatırım vardır o da {geçti_3["hisse"].tolist()} yatırımıdır")
+    st.write(f"portföy getirisi 3 yılda {portfoy_getirisi_3}%  getiri sağlamışdır  {adet_3} tane geçen  yatırım vardır o da {geçti_3["hisse"].tolist()} yatırımıdır")
     fig , ax=plt.subplots()
     ax.set_title("3 yıllık getiri")
     ax.barh(my_p["hisse"], aa["3_yıllık_getiri"])
@@ -167,7 +171,7 @@ if st.button("oluştur"):
     geçti_4=aa[aa["4_yıllık_getiri"] > portfoy_getirisi_4]
     adet_4=len(geçti_4)
 
-    st.write(f"portföy getirisi 4 yılda {portfoy_getirisi_4} getiri sağlamışdır  {adet_4} tane  geçen yatırım vardır o da {geçti_4["hisse"].tolist()} yatırımıdır ")
+    st.write(f"portföy getirisi 4 yılda {portfoy_getirisi_4}%  getiri sağlamışdır  {adet_4} tane  geçen yatırım vardır o da {geçti_4["hisse"].tolist()} yatırımıdır ")
 
     fig , ax=plt.subplots()
     ax.set_title("4 yıllık getiri")
@@ -182,7 +186,7 @@ if st.button("oluştur"):
     adet_5=len(geçti_5)
 
     
-    st.write(f"portföy getirisi 5 yılda {portfoy_getirisi_5} getiri sağladı {adet_5} tane  geçen yatırım vardır o da {geçti_4["hisse"].tolist()} yatırımıdır")
+    st.write(f"portföy getirisi 5 yılda {portfoy_getirisi_5}%  getiri sağladı {adet_5} tane  geçen yatırım vardır o da {geçti_4["hisse"].tolist()} yatırımıdır")
 
     fig , ax=plt.subplots()
     ax.set_title("5 yıllık getiri")
@@ -206,15 +210,30 @@ if st.button("oluştur"):
     ax.pie(my_p["dağılım %"], autopct="%1.1f%%" ,labels=my_p["hisse"])
     st.pyplot(fig)
 
-    # forward_pe grafiği
+    # sektör bilgileri
     fig , ax=plt.subplots()
+    ax.set_title("Sektör")
+    sek=my_p["sektör"].value_counts()
+    ax.barh(sek.index , sek.values)
+    ax.grid(True)
+    st.pyplot(fig)
+
+    # eps grafiği
+    my_p["eps"]=(my_p["eps"].astype(str).str.replace(",",".", regex=False) )
+    my_p["eps"]=pd.to_numeric(my_p["eps"], errors="coerce")
+    fig , ax=plt.subplots()
+    ax.set_title("eps")
     ax.barh(my_p["hisse"] , my_p["eps"])
     ax.grid(True)
     st.pyplot(fig)
 
+    # forward_pe grafiği
+    my_p["forward"]=(my_p["forward"].astype(str).str.replace(",",".", regex=False))
+    my_p["forward"]=pd.to_numeric( my_p["forward"], errors="coerce")
     fig , ax= plt.subplots()
-
-    ax.barh(my_p["hisse"], my_p["forward"])
+    ax.set_title("forward")
+    ax.barh(my_p["hisse"] ,my_p["forward"])
+    ax.grid(True)
     st.pyplot(fig)
 
 
@@ -223,19 +242,26 @@ if st.button("oluştur"):
 
 
     st.balloons()
+   
+    st.sidebar.page_link("gemini", label="gemini")
 
+
+    
 # chat bot bölümü
 
 client=genai.Client(api_key="AIzaSyCjDe7IloE_Pvgtsj1h2vCL0PcpHMT838c")
-    
-sor=st.chat_input("sor:")
+
+getiri=aa.to_string(index=False)
+portfoy_text = my_p[["hisse","sektör","değeri","beta","pe"]].to_string(index=False)
+sor=st.chat_input(f"sor:" )
 if sor:
+  
   if sor.lower() in ["çık","out","bırak"]:
     st.stop()
         
   cevap=client.models.generate_content(
   model="gemini-2.0-flash",
-  contents=sor
+  contents=portfoy_text
   )
   st.write("cevap:", cevap.text)
   st.caption("burdaki yazılanlar yatırım tavsiyesi değildir bilgileri kontrol ediniz !!!!")
