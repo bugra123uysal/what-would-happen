@@ -134,6 +134,9 @@ Bu yapı, kullanıcının kendi stratejisini sayısal olarak görmesini sağlar.
 <img width="948" height="631" alt="Ekran görüntüsü 2026-01-11 005812" src="https://github.com/user-attachments/assets/dda497fe-aa95-4846-8284-bb47170c6c8d" />
 
 
+<img width="1352" height="783" alt="Ekran görüntüsü 2026-01-21 232641" src="https://github.com/user-attachments/assets/c26099b5-6ea3-4201-aa09-a5a2605b3c2d" />
+
+
 Geliştirici
 
 Mesut Buğra Uysal
