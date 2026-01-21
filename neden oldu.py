@@ -6,8 +6,8 @@ import requests
 import os 
 
 """ veri seti e tablo """
-sheed_id="****************"
-sheed_name="*****************"
+sheed_id="*****"
+sheed_name="*****"
 aa=f"https://docs.google.com/spreadsheets/d/{sheed_id}/gviz/tq?tqx=out:csv&sheet={sheed_name}"
 
 # sayfalar 
@@ -68,7 +68,7 @@ for myprfy in tumu:
         
         pppört.append({
          "hisse":myprfy ,
-         "adet":adet,
+         "adet":adet ,
          "sektör": sektör,
          "fiyat": fıı,
          "değeri":h_degeri,
@@ -110,6 +110,8 @@ st.dataframe(my_p)
 aa=pd.DataFrame(analiz)
 st.dataframe(aa)
 
+ 
+
 
 if st.button("oluştur"):
     # portföy getirileri  
@@ -140,9 +142,6 @@ if st.button("oluştur"):
     # 2 yıllık getiri
     geçti_2= aa[aa["2_yıllık_getiri"] > portfoy_getirisi_2]
     adet_2=len(geçti_2)
-
-
-
 
     st.write(f"portföy getirisi 2 yılda {portfoy_getirisi_2}%  getiri sağlamışdır portföy getirisi {adet_2} tane geçen yatırım vardır o da {geçti_2["hisse"].tolist()} yatırımıdır  ")
     fig , ax=plt.subplots()
@@ -195,21 +194,26 @@ if st.button("oluştur"):
     ax.grid(True)
     ax.legend()
     st.pyplot(fig)
- 
     
+    my_p["değeri"]=pd.to_numeric(my_p["değeri"] , errors="coerce")
+    my_p["beta"]=pd.to_numeric(my_p["beta"] , errors="coerce")
+    # beta portföy riski
+    portfoy_beta=(my_p["değeri"] * my_p["beta"]).sum() / my_p["değeri"].sum()
+
     pörtföy= my_p["değeri"].sum()
-
-    st.write(f"toplam değer: {pörtföy}")
-
-    my_p["dağılım %"]=(my_p["değeri"] / pörtföy)*100
    
+    st.write(f"toplam değer: {pörtföy}")
+     # portföy beta katsayıs
+    st.write(f"portföy beta değeri: {portfoy_beta}")
+    
+    my_p["dağılım %"]=(my_p["değeri"] / pörtföy)*100
+    
     
      # pasta grafiği dağılım
     fig, ax =plt.subplots()
     my_p=my_p.dropna(subset="dağılım %")
     ax.pie(my_p["dağılım %"], autopct="%1.1f%%" ,labels=my_p["hisse"])
-    st.pyplot(fig)
-
+    st.pyplot(fig) 
     # sektör bilgileri
     fig , ax=plt.subplots()
     ax.set_title("Sektör")
@@ -239,29 +243,36 @@ if st.button("oluştur"):
 
     #indirme bölümü 
     st.download_button("indir (excel)", my_p.to_csv(index=True) , "pörtföy.csv")
+   
 
 
     st.balloons()
+
+
    
-    st.sidebar.page_link("gemini", label="gemini")
 
 
     
 # chat bot bölümü
 
-client=genai.Client(api_key="AIzaSyCjDe7IloE_Pvgtsj1h2vCL0PcpHMT838c")
+client=genai.Client(api_key="****************")
 
-getiri=aa.to_string(index=False)
-portfoy_text = my_p[["hisse","sektör","değeri","beta","pe"]].to_string(index=False)
-sor=st.chat_input(f"sor:" )
+
+sor=st.chat_input(f"sor:"   )
 if sor:
-  
-  if sor.lower() in ["çık","out","bırak"]:
-    st.stop()
+  gecmis_get=aa[['1_yıllık_getiri','2_yıllık_getiri','3_yıllık_getiri','4_yıllık_getiri','5_yıllık_getiri']].to_markdown(index=False)
+  guncel_verı=my_p[["hisse", "adet","sektör", "fiyat","değeri", "pe","forward","kar","eps", "beta"]].to_markdown(index=False)
+  hisse=myprfy
+
+  prompt=f""" geçmiş getiri analizi: {gecmis_get} , "güncel veriler": {guncel_verı},"seçilen hisseler": {hisse} ,   soru: {sor} yatırım tavsiyesi değildir """
         
   cevap=client.models.generate_content(
-  model="gemini-2.0-flash",
-  contents=portfoy_text
-  )
-  st.write("cevap:", cevap.text)
+    model="gemini-2.5-pro",
+    contents=prompt
+    )
+    
+    
+  
+  st.chat_message("user").write(sor)
+  st.chat_message("assistant").write(cevap.text)
   st.caption("burdaki yazılanlar yatırım tavsiyesi değildir bilgileri kontrol ediniz !!!!")
